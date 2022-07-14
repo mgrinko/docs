@@ -1,8 +1,8 @@
 # React + Typescript
 
-- Use `.tsx` extension in all the files having JSX (e.g. `index.tsx`)
-- Create a `types` folder and put global types there (1 file = 1 interface)
-- Put types for `Props` and `State` in its component file
+1. Use `.tsx` extension in all the files having JSX (e.g. `index.tsx`)
+1. Create a `types` folder and put global types there (1 file = 1 interface)
+1. Put types for `Props` and `State` in its component file
 
 ## Functional component
 ```tsx
