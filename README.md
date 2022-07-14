@@ -1,8 +1,8 @@
 # React + Typescript
 
-1. Use `.tsx` extension in all the files having JSX (e.g. `index.tsx`)
-1. Create a `types` folder and put global types there (1 file = 1 interface)
-1. Put types for `Props` and `State` in its component file
+1. Use the `.tsx` extension for all the files containing JSX (e.g. `src/index.tsx`).
+1. Create the `types` folder and put all the interfaces there (1 file = 1 interface).
+1. Keep `Props` and `State` types in its component file.
 
 ## Functional component
 ```tsx
@@ -40,30 +40,25 @@ type Props = {
 
 class Counter extends React.Component<Props, State> {
 
-  // Readonly protects you from a mutation `this.state.title = 'Hello'`
+  // explicit state type tells TS that `selectedUser` can be a `User` not only `null`
   state: Readonly<State> = { 
     title: '',
     users: [],
     selectedUser: null,
-    // without `state: State` typescript can't understand
-    // that `selectedUser` can also be a `User`, not only null
   };
   
+  componentDidMount() {
+    // users must be User[] not number[]
+    this.setState({ users: [1, 2, 3] }); // type error
+  
+    // Readonly<State> protects you from making a mutation
+    this.state.title = 'Hello'; // type error
+  }
+  
   render() {
-    const { title, users } = this.state;
+    const { title, users, selectedUser } = this.state;
     
-    return (
-      <>
-        <h1>{title}</h1>
-        <ul>
-          {users.map(user => (
-            <li key={user.id}>
-              {user.name}
-            </li>
-          ))}
-        </ul>
-      </>
-    );
+    return ( ... );
   }
 }
 ```
